@@ -1,4 +1,4 @@
-const CACHE_PREFIX='ethio-live-';
+const LEGACY_CACHE_PREFIXES=['ethio-live-','fetan-'];
 
 self.addEventListener('install',event=>{
   self.skipWaiting();
@@ -7,7 +7,7 @@ self.addEventListener('install',event=>{
 self.addEventListener('activate',event=>{
   event.waitUntil((async()=>{
     const keys=await caches.keys();
-    await Promise.all(keys.filter(key=>key.startsWith(CACHE_PREFIX)).map(key=>caches.delete(key)));
+    await Promise.all(keys.filter(key=>LEGACY_CACHE_PREFIXES.some(prefix=>key.startsWith(prefix))).map(key=>caches.delete(key)));
     await self.clients.claim();
   })());
 });
@@ -20,8 +20,8 @@ self.addEventListener('activate',event=>{
 self.addEventListener('push',event=>{
   let payload={};
   try{payload=event.data?event.data.json():{}}catch{payload={body:event.data?.text()||''}}
-  const title=payload.title||'EthioLiveScores';
-  const options={body:payload.body||'New football update',tag:payload.tag||payload.type||'ethio-live-update',data:{url:payload.url||'/'},vibrate:[120,60,120],renotify:true};
+  const title=payload.title||'FETAN';
+  const options={body:payload.body||'New football update',tag:payload.tag||payload.type||'fetan-football-update',data:{url:payload.url||'/'},vibrate:[120,60,120],renotify:true};
   event.waitUntil(self.registration.showNotification(title,options));
 });
 
