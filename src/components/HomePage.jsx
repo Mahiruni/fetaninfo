@@ -57,7 +57,7 @@ function EditorialLead({lang}){
  const title=story?(lang==='am'?(story.titleAm||story.titleEn):(story.titleEn||story.titleAm)):'The world’s game. One destination.';
  const summary=story?(lang==='am'?(story.summaryAm||story.summaryEn):(story.summaryEn||story.summaryAm)):'Breaking football stories, live match intelligence and every moment that matters. All in one place.';
  return <section className="fetan-editorial-hero" aria-labelledby="fetan-editorial-title">
-  <div className="fetan-editorial-visual" aria-hidden="true"><div className="fetan-editorial-halo"/><div className="fetan-editorial-glyph">F<span>.</span></div><div className="fetan-editorial-grid"/></div>
+  <div className="fetan-editorial-visual fetan-fire-stage" aria-hidden="true"><div className="fetan-editorial-halo"/><div className="fetan-fire-glow"/><div className="fetan-fire-plume plume-one"/><div className="fetan-fire-plume plume-two"/><div className="fetan-fire-plume plume-three"/><div className="fetan-fire-embers"/><div className="fetan-editorial-glyph">F<span>.</span></div><div className="fetan-editorial-grid"/></div>
   <div className="fetan-editorial-content">
    <span className="fetan-editorial-label"><span className="fetan-kicker-dot"/> {story?'THE LATEST / VERIFIED NEWS':'FETAN / GLOBAL FOOTBALL'}</span>
    <h1 id="fetan-editorial-title">{title}</h1>
