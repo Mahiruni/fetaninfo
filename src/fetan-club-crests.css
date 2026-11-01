@@ -1,10 +1,16 @@
-/* Matchday club imagery — real provider crests, no fake club artwork */
-.fetan-featured-clubs{margin-top:27px;padding:17px 18px 14px;border:1px solid #ffffff24;background:#08090b9c;border-radius:15px;backdrop-filter:blur(12px);max-width:620px}
-.fetan-featured-clubs-title{font-size:9px;color:#ff7087;font-weight:850;letter-spacing:.17em}
-.fetan-featured-clubs-row{display:flex;align-items:flex-start;gap:13px;overflow-x:auto;scrollbar-width:thin;padding:15px 0 3px}
-.fetan-featured-club{display:flex;align-items:center;flex-direction:column;gap:7px;min-width:74px;max-width:82px;flex:1}
-.fetan-featured-club img{display:block;width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 3px 9px #000b)}
-.fetan-featured-club-fallback{width:48px;height:48px;border:1px solid #6e3543;border-radius:50%;display:grid;place-items:center;color:#fff;background:#3d1b28;font-weight:900;font-size:15px}
+/* Seamless full-bleed club crest ticker: no rectangle, no card, no framing. */
+.fetan-featured-clubs{width:100%;max-width:none!important;margin:28px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;overflow:hidden}
+.fetan-featured-clubs-title{display:block;padding:0 0 14px;font-size:10px;font-weight:900;letter-spacing:.15em;color:#ff7087}
+.fetan-featured-clubs-viewport{width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.fetan-featured-clubs-track{display:flex;width:max-content;align-items:stretch;animation:fetan-crests-loop var(--fetan-crest-duration,65s) linear infinite;will-change:transform}
+.fetan-featured-clubs-set{display:flex;align-items:flex-start;flex:0 0 auto;gap:24px;padding-right:24px}
+.fetan-featured-club{display:flex;align-items:center;flex-direction:column;justify-content:flex-start;gap:10px;width:85px;min-width:85px;max-width:85px;flex:0 0 85px}
+.fetan-featured-club img{display:block;width:59px;height:59px;object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;filter:drop-shadow(0 5px 12px #0009)}
+.fetan-featured-club-fallback{width:59px;height:59px;display:grid;place-items:center;color:#fff;background:#ffffff12;border:1px solid #ffffff24;border-radius:50%;font-size:14px;font-weight:900}
 .fetan-featured-club-fallback[hidden]{display:none}
-.fetan-featured-club small{font-size:9px;line-height:1.3;color:#e4dfe2;text-align:center;max-width:80px;overflow-wrap:anywhere}
-@media(max-width:650px){.fetan-featured-clubs{margin-top:22px;padding:12px 12px 9px}.fetan-featured-clubs-row{gap:7px}.fetan-featured-club{min-width:64px}.fetan-featured-club img,.fetan-featured-club-fallback{width:42px;height:42px}.fetan-featured-club small{font-size:8px}}
+.fetan-featured-club small{max-width:85px;font-size:10px;line-height:1.3;font-weight:650;color:#f3eaf0;text-align:center;overflow-wrap:anywhere}
+.fetan-featured-clubs-status{display:block;padding:12px 0;color:#b4a6ad;font-size:12px}
+@keyframes fetan-crests-loop{to{transform:translateX(-50%)}}
+.fetan-featured-clubs-viewport:hover .fetan-featured-clubs-track,.fetan-featured-clubs-viewport:focus-within .fetan-featured-clubs-track{animation-play-state:paused}
+@media(max-width:650px){.fetan-featured-clubs{margin-top:24px!important}.fetan-featured-clubs-title{font-size:9px;line-height:1.65;padding-bottom:13px}.fetan-featured-clubs-set{gap:17px;padding-right:17px}.fetan-featured-club{width:73px;min-width:73px;max-width:73px;flex-basis:73px;gap:8px}.fetan-featured-club img,.fetan-featured-club-fallback{width:53px;height:53px}.fetan-featured-club small{font-size:9px;max-width:73px}}
+@media(prefers-reduced-motion:reduce){.fetan-featured-clubs-track{animation:none!important}.fetan-featured-clubs-viewport{overflow-x:auto;scrollbar-width:none}.fetan-featured-clubs-viewport::-webkit-scrollbar{display:none}}
