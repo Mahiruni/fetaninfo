@@ -14,3 +14,10 @@
 .fetan-featured-clubs-viewport:hover .fetan-featured-clubs-track,.fetan-featured-clubs-viewport:focus-within .fetan-featured-clubs-track{animation-play-state:paused}
 @media(max-width:650px){.fetan-featured-clubs{margin-top:24px!important}.fetan-featured-clubs-title{font-size:9px;line-height:1.65;padding-bottom:13px}.fetan-featured-clubs-set{gap:0;padding-right:0}.fetan-featured-club{width:64px;min-width:64px;max-width:64px;flex-basis:64px;gap:8px}.fetan-featured-club img,.fetan-featured-club-fallback{width:53px;height:53px}.fetan-featured-club small{font-size:9px;max-width:64px}}
 @media(prefers-reduced-motion:reduce){.fetan-featured-clubs-track{animation:none!important}.fetan-featured-clubs-viewport{overflow-x:auto;scrollbar-width:none}.fetan-featured-clubs-viewport::-webkit-scrollbar{display:none}}
+
+/* Compact continuous ticker: smaller crests, no inter-club spacing. */
+.fetan-featured-clubs-set{gap:0!important;padding-right:0!important}
+.fetan-featured-club{width:54px!important;min-width:54px!important;max-width:54px!important;flex:0 0 54px!important;gap:4px!important}
+.fetan-featured-club img,.fetan-featured-club-fallback{width:35px!important;height:35px!important}
+.fetan-featured-club small{font-size:7px!important;line-height:1.15!important;max-width:52px!important}
+@media(max-width:650px){.fetan-featured-club{width:49px!important;min-width:49px!important;max-width:49px!important;flex-basis:49px!important}.fetan-featured-club img,.fetan-featured-club-fallback{width:32px!important;height:32px!important}.fetan-featured-club small{font-size:7px!important;max-width:47px!important}}
