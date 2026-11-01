@@ -17,3 +17,8 @@
 .fetan-editorial-hero .fetan-editorial-content{position:relative;z-index:2}
 .fetan-editorial-hero .fetan-fire-stage::after{content:'';position:absolute;inset:0;z-index:6;pointer-events:none;background:linear-gradient(90deg,rgba(5,5,9,.91) 0%,rgba(5,5,9,.68) 43%,rgba(5,5,9,.12) 100%),linear-gradient(0deg,rgba(5,5,9,.7),transparent 58%)}
 @media(max-width:700px){.fetan-editorial-hero .fetan-fire-stage::after{background:linear-gradient(0deg,rgba(5,5,9,.92),rgba(5,5,9,.42) 75%,rgba(5,5,9,.15))}}
+
+/* Edge-to-edge hero: no card, border, frame, rounded corners or surrounding gap. */
+.fetan-home .fetan-editorial-hero{width:100%;max-width:none;margin:0;min-height:min(86svh,820px);border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important;overflow:hidden}
+.fetan-home .fetan-editorial-hero .fetan-fire-stage{border:0!important;border-radius:0!important;box-shadow:none!important}
+@media(max-width:700px){.fetan-home .fetan-editorial-hero{margin:0;min-height:78svh;border-radius:0!important}.fetan-home .fetan-editorial-content{padding:42px 24px 44px}}
