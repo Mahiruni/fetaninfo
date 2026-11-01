@@ -1,6 +1,6 @@
 import { Component, lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, CalendarDays, ChevronRight, Radio, ShieldCheck, Trophy, Newspaper, Star, Clock3 } from 'lucide-react';
+import { ArrowUpRight, CalendarDays, ChevronRight, Radio, ShieldCheck, Trophy, Newspaper, Star, Clock3, MessageCircle } from 'lucide-react';
 import { apiFetch } from '../api';
 
 const MatchCenter=lazy(()=>import('./MatchCenter'));
@@ -77,9 +77,14 @@ function FavoriteEntry(){
  function save(e){e.preventDefault();const clean=draft.trim().slice(0,60);try{if(clean)localStorage.setItem('fetan_favorite_club',clean);else localStorage.removeItem('fetan_favorite_club')}catch{}setClub(clean);setEditing(false)}
  return <section className="fetan-favorites-entry"><div className="fetan-favorites-icon"><Star size={21}/></div><div><span>03 / YOUR FOOTBALL</span><h2>{club?'Following '+club:'Make FETAN yours.'}</h2><p>{club?'Your favorite club is saved on this device. Personalized fixtures and alerts are coming next.':'Start with your favorite club. A personal football experience begins here.'}</p></div>{editing?<form onSubmit={save} className="fetan-favorite-form"><input aria-label="Favorite club" maxLength={60} value={draft} onChange={e=>setDraft(e.target.value)} placeholder="Your favorite club"/><button type="submit">Save</button></form>:<button className="fetan-favorite-button" onClick={()=>{setDraft(club);setEditing(true)}}>{club?'Edit favorite':'Choose a club'} <ArrowUpRight size={15}/></button>}</section>;
 }
+function QuickDock(){
+ const items=[{href:'#scores',icon:Radio,label:'Live now',hint:'Scores & fixtures',live:true},{to:'/competitions',icon:Trophy,label:'Leagues',hint:'Tables & results'},{to:'/news',icon:Newspaper,label:'Stories',hint:'News & analysis'},{href:'#community',icon:MessageCircle,label:'Fan zone',hint:'Polls & chat'}];
+ return <nav className="fa-dock" aria-label="Quick actions">{items.map(({to,href,icon:Icon,label,hint,live})=>{const inner=<><span className="fa-dock-icon"><Icon size={20}/>{live&&<i className="fa-dock-live"/>}</span><b>{label}</b><small>{hint}</small></>;return to?<Link key={label} to={to} className="fa-dock-item">{inner}</Link>:<a key={label} href={href} className="fa-dock-item">{inner}</a>})}</nav>;
+}
 export default function HomePage({lang='en',onNeedAuth}){
  return <main className="fetan-home">
    <EditorialLead lang={lang}/>
+   <QuickDock/>
    <div className="fetan-section-index"><span>01 / THE MATCH CENTER</span><span>LIVE · FIXTURES · RESULTS</span></div>
    <SafeSection><Suspense fallback={<div className="fetan-section-loading" aria-busy="true">Loading verified fixtures…</div>}><MatchCenter onNeedAuth={onNeedAuth}/></Suspense></SafeSection>
    <div className="fetan-section-index"><span>02 / THE COMPETITIONS</span><Link to="/competitions">EXPLORE ALL <ArrowUpRight size={13}/></Link></div>

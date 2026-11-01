@@ -22,6 +22,7 @@ import './fetan-match-premium.css';
 import './fetan-glass-nav.css';
 import './fetan-elite-matchday.css';
 import './fetan-match-center.css';
+import './fetan-award.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>

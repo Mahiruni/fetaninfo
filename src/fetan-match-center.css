@@ -1,8 +1,8 @@
 /* FETAN MATCH CENTER — modern mobile-first match detail (scoped to .mc, loaded last) */
 .mc{
-  --mc-bg:#0a0e1a;--mc-card:#101626;--mc-card-2:#151c30;--mc-line:rgba(255,255,255,.08);
-  --mc-text:#f3f5fb;--mc-muted:#8f9ab3;--mc-a:#8b5cf6;--mc-b:#3b82f6;--mc-live:#ff4d5f;
-  --mc-grad:linear-gradient(135deg,#8b5cf6,#3b82f6);
+  --mc-bg:#08080b;--mc-card:#111116;--mc-card-2:#17171d;--mc-line:rgba(255,255,255,.08);
+  --mc-text:#f3f5fb;--mc-muted:#8f9ab3;--mc-a:#ff2e63;--mc-b:#ff6a3d;--mc-live:#ff4d5f;
+  --mc-grad:linear-gradient(135deg,#ff2e63,#ff6a3d);
   padding-bottom:calc(110px + env(safe-area-inset-bottom))!important;
 }
 
@@ -16,8 +16,8 @@
 /* Hero */
 .mc .match-hero{
   border-radius:26px!important;padding:20px 16px 16px!important;border:1px solid var(--mc-line)!important;
-  background:radial-gradient(120% 90% at 15% 0%,rgba(139,92,246,.28),transparent 55%),
-             radial-gradient(90% 80% at 100% 100%,rgba(59,130,246,.22),transparent 60%),#0d1224!important;
+  background:radial-gradient(120% 90% at 15% 0%,rgba(255,46,99,.28),transparent 55%),
+             radial-gradient(90% 80% at 100% 100%,rgba(255,106,61,.22),transparent 60%),#0d0d12!important;
   box-shadow:0 24px 60px rgba(2,6,23,.5)!important}
 .mc .match-hero:after{border-color:rgba(255,255,255,.035)!important}
 .mc .hero-league{color:#fff!important;font-size:13px!important;font-weight:800!important;letter-spacing:.01em}
@@ -45,7 +45,7 @@
   font-size:13.5px!important;font-weight:800!important;box-shadow:none!important}
 .mc .match-tabs button.active,html.dark .mc .match-tabs button.active{
   background:var(--mc-grad)!important;border-color:transparent!important;color:#fff!important;
-  box-shadow:0 8px 22px rgba(99,102,241,.4)!important}
+  box-shadow:0 8px 22px rgba(255,46,99,.4)!important}
 
 /* Cards */
 .mc .detail-card{background:var(--mc-card)!important;border:1px solid var(--mc-line)!important;border-radius:22px!important;box-shadow:0 10px 30px rgba(0,0,0,.28)!important;overflow:hidden}
@@ -53,14 +53,14 @@
 .mc .detail-card-head b{font-size:15px!important;font-weight:800!important;color:var(--mc-text)!important}
 .mc .detail-card-head small{font-size:11px!important;color:var(--mc-muted)!important}
 .mc .module-stack,.mc .detail-side,.mc .detail-main{gap:14px!important}
-.mc-pill{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#c9b8ff;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.3);padding:5px 10px;border-radius:999px}
+.mc-pill{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#ff9db5;background:rgba(255,46,99,.14);border:1px solid rgba(255,46,99,.3);padding:5px 10px;border-radius:999px}
 .mc-pill.live{color:#ffd0d5;background:rgba(255,77,95,.16);border-color:rgba(255,77,95,.4)}
-.mc-chip{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff;background:var(--mc-grad);box-shadow:0 6px 16px rgba(99,102,241,.35)}
+.mc-chip{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff;background:var(--mc-grad);box-shadow:0 6px 16px rgba(255,46,99,.35)}
 
 /* Countdown */
-.mc-countdown{border-radius:22px;padding:16px 18px;border:1px solid rgba(139,92,246,.35);
-  background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(59,130,246,.12));display:grid;gap:12px}
-.mc-countdown-label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#d7ccff}
+.mc-countdown{border-radius:22px;padding:16px 18px;border:1px solid rgba(255,46,99,.35);
+  background:linear-gradient(135deg,rgba(255,46,99,.2),rgba(255,106,61,.12));display:grid;gap:12px}
+.mc-countdown-label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#ffc2d1}
 .mc-countdown>div{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .mc-cd-cell{background:rgba(8,12,24,.55);border:1px solid var(--mc-line);border-radius:14px;padding:11px 4px;text-align:center}
 .mc-cd-cell b{display:block;font-size:24px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
@@ -75,15 +75,15 @@
 
 /* Key moments / empty state */
 .mc-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:38px 24px 40px}
-.mc-empty-ring{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#c9b8ff;
-  background:radial-gradient(circle,rgba(139,92,246,.22),rgba(139,92,246,.04));border:1px dashed rgba(139,92,246,.5);animation:mcFloat 3.2s ease-in-out infinite}
+.mc-empty-ring{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#ff9db5;
+  background:radial-gradient(circle,rgba(255,46,99,.22),rgba(255,46,99,.04));border:1px dashed rgba(255,46,99,.5);animation:mcFloat 3.2s ease-in-out infinite}
 .mc-empty b{margin-top:16px;font-size:17px;font-weight:800;color:var(--mc-text)}
 .mc-empty p{margin:7px 0 0;max-width:290px;font-size:13.5px;line-height:1.55;color:var(--mc-muted)}
 @keyframes mcFloat{50%{transform:translateY(-5px)}}
 .mc .moment-list{padding:6px 16px 12px!important}
 .mc .moment-row{grid-template-columns:48px 36px 1fr!important;padding:12px 0!important;border-color:var(--mc-line)!important}
-.mc .minute-chip{font-size:13px!important;color:#c9b8ff!important}
-.mc .event-icon{width:34px!important;height:34px!important;border-radius:11px!important;background:rgba(139,92,246,.16)!important;color:#c9b8ff!important}
+.mc .minute-chip{font-size:13px!important;color:#ff9db5!important}
+.mc .event-icon{width:34px!important;height:34px!important;border-radius:11px!important;background:rgba(255,46,99,.16)!important;color:#ff9db5!important}
 .mc .moment-row b{font-size:14px!important;color:var(--mc-text)!important}
 .mc .moment-row small{font-size:12px!important;color:var(--mc-muted)!important}
 
@@ -98,7 +98,7 @@
 
 /* Other tabs inherit the refresh */
 .mc .module-empty{min-height:230px}
-.mc .module-empty svg{color:#c9b8ff!important}
+.mc .module-empty svg{color:#ff9db5!important}
 .mc .module-empty b{font-size:16px!important;color:var(--mc-text)!important}
 .mc .module-empty p{font-size:13.5px!important;color:var(--mc-muted)!important}
 .mc .inline-warning{border-radius:16px!important}
