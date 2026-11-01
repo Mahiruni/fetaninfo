@@ -1,6 +1,7 @@
 /* FETAN cinematic fire: compositor-friendly, decorative and motion-aware. */
-.fetan-fire-stage{position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 100%,#751014 0%,#24080d 40%,#08090d 78%)}
-.fetan-fire-stage .fetan-editorial-glyph{position:relative;z-index:5;text-shadow:0 0 30px rgba(255,65,25,.4)}
+.fetan-editorial-hero{background:#08090d}
+.fetan-editorial-hero .fetan-fire-stage{position:absolute;inset:0;z-index:0;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 100%,#751014 0%,#24080d 40%,#08090d 78%)}
+.fetan-fire-stage .fetan-editorial-glyph{z-index:5;text-shadow:0 0 30px rgba(255,65,25,.4)}
 .fetan-fire-glow{position:absolute;inset:15% -15% -20%;z-index:1;background:radial-gradient(ellipse at 50% 95%,rgba(255,94,0,.86),rgba(240,26,8,.32) 40%,transparent 72%);animation:fetan-glow 3s ease-in-out infinite alternate;pointer-events:none}
 .fetan-fire-plume{position:absolute;bottom:-40%;left:8%;width:50%;height:115%;z-index:2;opacity:.8;border-radius:48% 52% 25% 25%;background:radial-gradient(ellipse at 50% 78%,#ffe35b 0%,#ff7d08 19%,#ee2608 46%,transparent 73%);filter:blur(18px);transform-origin:50% 100%;animation:fetan-flame 3.8s ease-in-out infinite alternate;pointer-events:none}
 .fetan-fire-plume.plume-two{left:36%;width:42%;height:130%;opacity:.7;animation-duration:2.9s;animation-delay:-1.4s;filter:blur(22px)}
@@ -11,3 +12,8 @@
 @keyframes fetan-embers-rise{from{background-position:10px 22px,45px 67px}to{background-position:10px -366px,45px -457px}}
 @media(prefers-reduced-motion:reduce){.fetan-fire-stage .fetan-fire-glow,.fetan-fire-stage .fetan-fire-plume,.fetan-fire-stage .fetan-fire-embers{animation:none!important}}
 @media(max-width:640px){.fetan-fire-plume{filter:blur(12px)}.fetan-fire-plume.plume-two{filter:blur(14px)}}
+
+/* Keep text legible while fire fills the entire hero behind the content. */
+.fetan-editorial-hero .fetan-editorial-content{position:relative;z-index:2}
+.fetan-editorial-hero .fetan-fire-stage::after{content:'';position:absolute;inset:0;z-index:6;pointer-events:none;background:linear-gradient(90deg,rgba(5,5,9,.91) 0%,rgba(5,5,9,.68) 43%,rgba(5,5,9,.12) 100%),linear-gradient(0deg,rgba(5,5,9,.7),transparent 58%)}
+@media(max-width:700px){.fetan-editorial-hero .fetan-fire-stage::after{background:linear-gradient(0deg,rgba(5,5,9,.92),rgba(5,5,9,.42) 75%,rgba(5,5,9,.15))}}
