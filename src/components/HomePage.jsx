@@ -1,45 +1,58 @@
-import { Component,lazy,Suspense,useEffect,useState } from 'react';
+import { Component, lazy, Suspense, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, CalendarDays, ChevronRight, Radio, ShieldCheck, Trophy, Newspaper } from 'lucide-react';
+import { apiFetch } from '../api';
 
 const MatchCenter=lazy(()=>import('./MatchCenter'));
 const CompetitionHub=lazy(()=>import('./CompetitionHub'));
 const NewsHub=lazy(()=>import('./NewsHub'));
 
-class HomeSectionBoundary extends Component{
-  constructor(props){super(props);this.state={failed:false}}
-  static getDerivedStateFromError(){return{failed:true}}
-  componentDidCatch(error){console.error('Homepage section failed:',error)}
-  render(){
-    if(this.state.failed)return <section className="page home-safe-state"><div className="league-card empty-day"><b>This section could not load</b><p>The homepage is still available. Free international football data may be temporarily unavailable.</p><button className="mini-refresh" onClick={()=>window.location.reload()}>Reload section</button></div></section>;
-    return this.props.children;
-  }
-}
+const LIVE=new Set(['LIVE','1H','HT','2H','ET','P','BT']);
+const FINISHED=new Set(['FT','AET','PEN']);
+const dateInAddis=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Addis_Ababa',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const statusOf=m=>String(m.status||'').toUpperCase();
+const teamName=(m,side)=>String(m[side+'Team']?.name||m[side+'_team']?.name||m[side+'_team_name']||m[side]||'TBD');
+const score=(m,side)=>m[side+'Score']??m[side+'_score']??m.score?.[side]??'–';
 
-function MatchCenterFallback(){
-  return <main className="page score-swipe-surface" id="scores" aria-busy="true">
-    <div className="page-head"><div><span className="eyebrow">Match center</span><h1>Football scores</h1><p className="page-subtitle">The app is online. Loading international football fixtures…</p></div></div>
-    <div className="content-grid"><section className="match-column"><div className="league-card"><div className="loading-shimmer"/><div className="loading-shimmer short"/><div className="loading-shimmer"/></div></section></div>
-  </main>;
+class SafeSection extends Component{
+ constructor(props){super(props);this.state={failed:false}}
+ static getDerivedStateFromError(){return{failed:true}}
+ componentDidCatch(error){console.error('FETAN section failed',error)}
+ render(){return this.state.failed?<div className="fetan-section-error" role="status">This section is temporarily unavailable. <button onClick={()=>window.location.reload()}>Retry</button></div>:this.props.children}
 }
-
+function Spotlight(){
+ const [data,setData]=useState({loading:true,matches:[],error:false});
+ useEffect(()=>{let alive=true;apiFetch('/matches?date='+dateInAddis()+'&league=english-premier-league').then(res=>{if(alive)setData({loading:false,matches:Array.isArray(res)?res:[],error:false})}).catch(()=>{if(alive)setData({loading:false,matches:[],error:true})});return()=>{alive=false}},[]);
+ const match=data.matches.find(m=>LIVE.has(statusOf(m)))||data.matches.find(m=>!FINISHED.has(statusOf(m)))||data.matches[0];
+ const live=match&&LIVE.has(statusOf(match));
+ return <section className="fetan-spotlight" aria-labelledby="fetan-hero-title">
+   <div className="fetan-spotlight-copy">
+     <div className="fetan-kicker"><span className="fetan-kicker-dot"/> THE GLOBAL FOOTBALL DESK <span className="fetan-kicker-line"/></div>
+     <h1 id="fetan-hero-title">Every match.<br/><em>Every moment.</em></h1>
+     <p>The game never stops. Follow verified scores, fixtures and the stories shaping world football—built for fans everywhere.</p>
+     <div className="fetan-hero-actions"><a href="#scores" className="fetan-primary-cta"><Radio size={17}/> Explore match center <ArrowUpRight size={17}/></a><Link to="/news" className="fetan-secondary-cta">Explore stories <ChevronRight size={17}/></Link></div>
+     <div className="fetan-hero-trust"><ShieldCheck size={15}/> Real match data · Africa/Addis_Ababa time · No invented scores</div>
+   </div>
+   <div className="fetan-spotlight-panel">
+     <div className="fetan-panel-top"><span><span className="fetan-kicker-dot"/> MATCHDAY PULSE</span><span>{new Intl.DateTimeFormat('en',{timeZone:'Africa/Addis_Ababa',day:'numeric',month:'short'}).format(new Date())} · EAT</span></div>
+     {data.loading?<div className="fetan-pulse-empty" aria-busy="true"><div className="fetan-skeleton"/><div className="fetan-skeleton short"/><p>Checking matchday fixtures…</p></div>:match?<div className="fetan-feature-match">
+       <div className="fetan-match-status">{live?'● LIVE':FINISHED.has(statusOf(match))?'FULL TIME':'MATCHDAY FIXTURE'}</div>
+       <div className="fetan-feature-teams"><div><span className="fetan-team-initial">{teamName(match,'home').slice(0,2).toUpperCase()}</span><strong>{teamName(match,'home')}</strong></div><div className="fetan-feature-score">{live||FINISHED.has(statusOf(match))?<>{score(match,'home')} <span>:</span> {score(match,'away')}</>:<span>VS</span>}</div><div><span className="fetan-team-initial">{teamName(match,'away').slice(0,2).toUpperCase()}</span><strong>{teamName(match,'away')}</strong></div></div>
+       <a href="#scores" className="fetan-panel-link">View matchday fixtures <ArrowUpRight size={16}/></a>
+     </div>:<div className="fetan-pulse-empty"><CalendarDays size={34}/><strong>{data.error?'Match feed temporarily unavailable':'No Premier League fixtures listed today'}</strong><p>{data.error?'Check the match center for other available competitions.':'Explore other competitions and upcoming matchdays below.'}</p><a href="#scores">Open match center <ArrowUpRight size={14}/></a></div>}
+     <div className="fetan-panel-bottom"><span>FETAN / FOOTBALL INTELLIGENCE</span><span>01 — 03</span></div>
+   </div>
+ </section>;
+}
 export default function HomePage({lang='en',onNeedAuth}){
-  const [showExtras,setShowExtras]=useState(false);
-
-  useEffect(()=>{
-    const id=window.setTimeout(()=>setShowExtras(true),900);
-    return()=>window.clearTimeout(id);
-  },[]);
-
-  return <>
-    <HomeSectionBoundary>
-      <Suspense fallback={<MatchCenterFallback/>}>
-        <MatchCenter onNeedAuth={onNeedAuth}/>
-      </Suspense>
-    </HomeSectionBoundary>
-
-    {showExtras&&<HomeSectionBoundary>
-      <Suspense fallback={null}>
-        <div className="page home-extras"><CompetitionHub lang={lang} compact/><NewsHub lang={lang} compact/></div>
-      </Suspense>
-    </HomeSectionBoundary>}
-  </>;
+ return <main className="fetan-home">
+   <Spotlight/>
+   <div className="fetan-section-index"><span>01 / THE MATCH CENTER</span><span>LIVE · FIXTURES · RESULTS</span></div>
+   <SafeSection><Suspense fallback={<div className="fetan-section-loading" aria-busy="true">Loading verified fixtures…</div>}><MatchCenter onNeedAuth={onNeedAuth}/></Suspense></SafeSection>
+   <div className="fetan-section-index"><span>02 / THE COMPETITIONS</span><Link to="/competitions">EXPLORE ALL <ArrowUpRight size={13}/></Link></div>
+   <SafeSection><Suspense fallback={null}><div className="page home-extras"><CompetitionHub lang={lang} compact/></div></Suspense></SafeSection>
+   <div className="fetan-section-index"><span>03 / THE NEWSROOM</span><Link to="/news">READ STORIES <ArrowUpRight size={13}/></Link></div>
+   <SafeSection><Suspense fallback={null}><div className="page home-extras"><NewsHub lang={lang} compact/></div></Suspense></SafeSection>
+   <section className="fetan-final-cta"><div><span>THE NEXT GENERATION OF FOOTBALL</span><h2>Football belongs to everyone.</h2><p>One destination for the matches, competitions and stories that matter.</p></div><Link to="/competitions">Explore football <Trophy size={18}/></Link></section>
+ </main>;
 }
