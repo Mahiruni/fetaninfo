@@ -1,0 +1,10 @@
+/* Matchday club imagery — real provider crests, no fake club artwork */
+.fetan-featured-clubs{margin-top:27px;padding:17px 18px 14px;border:1px solid #ffffff24;background:#08090b9c;border-radius:15px;backdrop-filter:blur(12px);max-width:620px}
+.fetan-featured-clubs-title{font-size:9px;color:#ff7087;font-weight:850;letter-spacing:.17em}
+.fetan-featured-clubs-row{display:flex;align-items:flex-start;gap:13px;overflow-x:auto;scrollbar-width:thin;padding:15px 0 3px}
+.fetan-featured-club{display:flex;align-items:center;flex-direction:column;gap:7px;min-width:74px;max-width:82px;flex:1}
+.fetan-featured-club img{display:block;width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 3px 9px #000b)}
+.fetan-featured-club-fallback{width:48px;height:48px;border:1px solid #6e3543;border-radius:50%;display:grid;place-items:center;color:#fff;background:#3d1b28;font-weight:900;font-size:15px}
+.fetan-featured-club-fallback[hidden]{display:none}
+.fetan-featured-club small{font-size:9px;line-height:1.3;color:#e4dfe2;text-align:center;max-width:80px;overflow-wrap:anywhere}
+@media(max-width:650px){.fetan-featured-clubs{margin-top:22px;padding:12px 12px 9px}.fetan-featured-clubs-row{gap:7px}.fetan-featured-club{min-width:64px}.fetan-featured-club img,.fetan-featured-club-fallback{width:42px;height:42px}.fetan-featured-club small{font-size:8px}}
