@@ -21,3 +21,10 @@
 .fetan-featured-club img,.fetan-featured-club-fallback{width:35px!important;height:35px!important}
 .fetan-featured-club small{font-size:7px!important;line-height:1.15!important;max-width:52px!important}
 @media(max-width:650px){.fetan-featured-club{width:49px!important;min-width:49px!important;max-width:49px!important;flex-basis:49px!important}.fetan-featured-club img,.fetan-featured-club-fallback{width:32px!important;height:32px!important}.fetan-featured-club small{font-size:7px!important;max-width:47px!important}}
+
+/* Crest-to-crest ticker: eliminate whitespace caused by wide item cells. */
+.fetan-featured-clubs-set{gap:0!important;padding:0!important}
+.fetan-featured-club{width:42px!important;min-width:42px!important;max-width:42px!important;flex:0 0 42px!important;gap:3px!important}
+.fetan-featured-club img,.fetan-featured-club-fallback{width:40px!important;height:40px!important;max-width:40px!important;object-fit:contain!important}
+.fetan-featured-club small{width:42px!important;max-width:42px!important;font-size:6px!important;line-height:1.1!important;letter-spacing:-.02em!important;overflow-wrap:anywhere!important}
+@media(max-width:650px){.fetan-featured-club{width:38px!important;min-width:38px!important;max-width:38px!important;flex-basis:38px!important}.fetan-featured-club img,.fetan-featured-club-fallback{width:37px!important;height:37px!important}.fetan-featured-club small{width:38px!important;max-width:38px!important;font-size:6px!important}}
