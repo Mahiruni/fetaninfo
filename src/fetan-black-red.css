@@ -19,7 +19,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 .topbar,.bottom-nav{background:rgba(9,10,12,.96)!important;border-color:#292a30!important}
 .topbar{box-shadow:0 12px 35px rgba(0,0,0,.34)!important}
 .brand-mark{background:transparent!important;box-shadow:none!important;border:0!important}
-.brand-mark svg path{fill:#f32648!important}
+.brand-mark svg path{fill:#F31F55!important}
 .brand-name{color:#fff!important;font-size:clamp(23px,2.5vw,30px)!important;font-weight:850!important}
 .brand-tagline{color:#aaaab2!important}
 .desktop-nav .nav-link{color:#c0c0c8!important}
