@@ -250,6 +250,15 @@ router.get('/provider/status', (req, res) => {
     leagues: LEAGUES, notice: SHORT_FREE_NOTICE, attribution: 'https://www.thesportsdb.com/'
   });
 });
+router.get('/club-crests', safeRoute(async (req, res) => {
+  const league = getLeague(req.query.league);
+  const teams = await fetchCollection('lookup_all_teams.php?id=' + league.id, 'teams', 24 * 60 * 60 * 1000);
+  const clubs = teams.filter(t => t && t.idTeam && t.strTeam).map(t => ({
+    id: String(t.idTeam), name: String(t.strTeam), league: league.slug,
+    logo: /^https:\/\//i.test(String(t.strBadge || t.strTeamBadge || '')) ? String(t.strBadge || t.strTeamBadge) : null
+  }));
+  res.set('Cache-Control', 'public, max-age=300, s-maxage=3600').json(clubs);
+}));
 router.get('/matches', safeRoute(async (req, res) => {
   const date = req.query.date == null ? today() : String(req.query.date);
   if (!validDate(date)) throw error(400, 'INVALID_DATE', 'Date must use YYYY-MM-DD.', 'Choose a valid calendar date.');
