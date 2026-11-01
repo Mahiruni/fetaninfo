@@ -1,0 +1,46 @@
+/* FETAN — definitive black / red broadcast identity. Loaded last. */
+:root,html,html.dark{
+ color-scheme:dark!important;
+ --bg:#08090b;--surface:#121316;--surface2:#191a1f;--surface3:#222329;
+ --text:#f8f8fa;--muted:#a4a5ad;--line:#303037;
+ --brand:#f32648;--brand2:#d91435;--brand3:#ff8093;--soft:#381720;
+ --live:#ff3b52;--amber:#ffb86c;--yellow:#f32648;--yellow2:#d91435;
+ --yellow-soft:#381720;--purple:#f32648;--purple-2:#d91435;--purple-3:#ff8093;--purple-soft:#381720;
+ --blue-black:#08090b;--blue-black-2:#121316;--velocity-ice:#ff8093;
+ --purple-glow:0 0 32px rgba(243,38,72,.14);
+ --shadow:0 20px 55px rgba(0,0,0,.38);
+}
+html,body,#root{background:#08090b!important;color:#f8f8fa!important}
+body{background:radial-gradient(ellipse at 85% -12%,rgba(243,38,72,.13),transparent 34rem),linear-gradient(180deg,#0d0e11 0%,#08090b 60%)!important}
+::selection{background:#f32648!important;color:white!important}
+a,button,input,textarea,select{accent-color:#f32648!important}
+a:hover{color:#ff5a73!important}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline-color:#f32648!important}
+.topbar,.bottom-nav{background:rgba(9,10,12,.96)!important;border-color:#292a30!important}
+.topbar{box-shadow:0 12px 35px rgba(0,0,0,.34)!important}
+.brand-mark{background:transparent!important;box-shadow:none!important;border:0!important}
+.brand-mark svg path{fill:#f32648!important}
+.brand-name{color:#fff!important;font-size:clamp(23px,2.5vw,30px)!important;font-weight:850!important}
+.brand-tagline{color:#aaaab2!important}
+.desktop-nav .nav-link{color:#c0c0c8!important}
+.desktop-nav .nav-link.active,.desktop-nav .nav-link:hover{background:#36131c!important;color:#ff6b81!important}
+.desktop-nav .nav-link.active:after{background:#f32648!important}
+.live-strip{background:#171013!important;border-color:#47202a!important;color:#fff!important}
+.live-dot{background:#f32648!important;box-shadow:0 0 0 4px rgba(243,38,72,.15)!important}
+.page-head .eyebrow,.eyebrow{color:#ff667e!important}
+.page-head h1,h1,h2,h3{color:#fff!important}
+.page-subtitle{color:#a7a8b1!important}
+.league-card,.match-card,.competition-card,.news-card,.article-card,.hero-card,.score-card,.fixture-card{
+ background:#15161a!important;border-color:#303037!important;color:#f8f8fa!important;
+ box-shadow:0 12px 30px rgba(0,0,0,.2)!important
+}
+.league-card:hover,.match-card:hover,.competition-card:hover,.news-card:hover{border-color:#733041!important}
+button.primary,.primary-btn,.signin-btn,.cta-button{background:#f32648!important;color:#fff!important;border-color:#f32648!important}
+button.primary:hover,.primary-btn:hover,.signin-btn:hover{background:#d91435!important}
+input,select,textarea{background:#1b1c21!important;border-color:#383940!important;color:#fff!important}
+::-webkit-scrollbar-track{background:#101114!important}::-webkit-scrollbar-thumb{background:#44454d!important}
+@media(max-width:700px){
+ .topbar-inner{min-height:60px!important}
+ .brand-name{font-size:25px!important}
+ .page{padding-left:14px!important;padding-right:14px!important}
+}
