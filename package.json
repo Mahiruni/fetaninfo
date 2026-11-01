@@ -1,8 +1,8 @@
 {
-  "name": "ethio-live-scores",
+  "name": "fetan-football",
   "version": "2.2.0",
   "private": true,
-  "description": "Component-based Ethiopian and international football live scores, competitions, sourced news and community platform",
+  "description": "FETAN global football platform — fixtures, live scores, competitions, verified news and fan community",
   "type": "commonjs",
   "main": "bootstrap.js",
   "scripts": {
