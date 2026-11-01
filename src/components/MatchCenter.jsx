@@ -80,7 +80,7 @@ export default function MatchCenter({onNeedAuth}){
     setLoading(false);setRefreshing(false);
   };
   useEffect(()=>{let active=true;apiFetch('/club-crests?league='+selectedLeague).then(rows=>{if(!active||!Array.isArray(rows))return;const next={};for(const club of rows){if(club?.logo&&club?.name)next[club.name.trim().toLowerCase()]=club.logo;}setClubCrests(next)}).catch(()=>{if(active)setClubCrests({})});return()=>{active=false}},[selectedLeague]);
-  const crest=(name,logo)=>verifiedLogo(name,logo)||clubCrests[String(name||'').trim().toLowerCase()]||'';
+  const crest=(name,logo)=>clubCrests[String(name||'').trim().toLowerCase()]||verifiedLogo(name,logo)||'';
   useEffect(()=>{try{localStorage.setItem('ethio-league',selectedLeague)}catch{}},[selectedLeague]);
   useEffect(()=>{loadData();return()=>{latestRequest.current++}},[selectedDate,selectedLeague]);
   useEffect(()=>{
@@ -112,7 +112,7 @@ export default function MatchCenter({onNeedAuth}){
   const total=(poll?.home_votes||0)+(poll?.draw_votes||0)+(poll?.away_votes||0),pct=n=>total?Math.round(n*100/total):0;
 
   return <main className="page score-swipe-surface" id="scores" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-    <div className="fetan-match-toolbar"><div><span className="eyebrow">FETAN / MATCHDAY</span><h2>Every match. <em>Every moment.</em></h2><p>Europe’s biggest leagues. Fixtures, results and the stories behind every game.</p></div><div className="match-head-actions"><div className={`connection ${demo?'demo':''}`}>{provider?.configured&&!demo?<Wifi size={13}/>:<WifiOff size={13}/>}<span/>{demo?'Scores unavailable':provider?.provider||'Football data'}</div><button className="mini-refresh" onClick={()=>{haptic();loadData(true)}} disabled={refreshing}><RefreshCw size={14} className={refreshing?'spin':''}/> Refresh</button></div></div>
+    <div className="fetan-match-toolbar"><div><span className="eyebrow">FETAN / ELITE MATCHDAY</span><h2>Matchday <em>Live.</em></h2><p>Fixtures, scores and league standings. All in one match center.</p></div><div className="match-head-actions"><div className={`connection ${demo?'demo':''}`}>{provider?.configured&&!demo?<Wifi size={13}/>:<WifiOff size={13}/>}<span/>{demo?'Scores unavailable':provider?.provider||'Football data'}</div><button className="mini-refresh" onClick={()=>{haptic();loadData(true)}} disabled={refreshing}><RefreshCw size={14} className={refreshing?'spin':''}/> Refresh</button></div></div>
 
     <div className="league-switcher" role="group" aria-label="Choose international competition">{internationalLeagues.map(item=><button type="button" key={item.slug} aria-pressed={selectedLeague===item.slug} className={selectedLeague===item.slug?'active':''} onClick={()=>{haptic();setSelectedLeague(item.slug);setFilter('all');setSelected(null);}}>{item.label}</button>)}</div>
     <p className="free-feed-note">Free data: up to 3 fixtures per day and 5 standings rows per league. Scores may be delayed; not an official real-time feed. <a href="https://www.thesportsdb.com/" target="_blank" rel="noopener noreferrer">Source: TheSportsDB</a></p>
