@@ -4,6 +4,8 @@ import Header from './components/Header';
 import HomePage from './components/HomePage';
 import BottomNav from './components/BottomNav';
 import VoiceFooter from './components/VoiceFooter';
+import SiteFooter from './components/SiteFooter';
+import { initReveal } from './reveal';
 import { useAuth } from './context/AuthContext';
 
 const MatchDetails=lazy(()=>import('./components/MatchDetails'));
@@ -27,6 +29,8 @@ export default function App(){
   useEffect(()=>{document.documentElement.lang=lang;localStorage.setItem('lang',lang)},[lang]);
   useEffect(()=>{if(location.hash){const id=location.hash.slice(1);requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({behavior:'auto',block:'start'}));}else window.scrollTo({top:0,behavior:'auto'});},[location.pathname,location.hash]);
 
+  useEffect(()=>initReveal(),[]);
+
   const openProfile=useCallback(()=>user?setProfileOpen(true):setAuthOpen(true),[user]);
   const toggleLang=useCallback(()=>setLang(x=>x==='en'?'am':'en'),[]);
   const needAuth=useCallback(()=>setAuthOpen(true),[]);
@@ -44,6 +48,7 @@ export default function App(){
         <Route path="*" element={<HomePage lang={lang} onNeedAuth={needAuth}/>}/>
       </Routes>
     </Suspense>
+    <SiteFooter/>
     <VoiceFooter/>
     <BottomNav onProfile={openProfile} onAuth={needAuth}/>
     {authOpen&&<Suspense fallback={null}><AuthModal open onClose={()=>setAuthOpen(false)}/></Suspense>}

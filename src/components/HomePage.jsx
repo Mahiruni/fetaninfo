@@ -52,6 +52,28 @@ function FeaturedClubs(){
  return <div className="fetan-featured-clubs" aria-label="Club crests across the five major European football leagues">{clubs.length?<div className="fetan-featured-clubs-viewport"><div className="fetan-featured-clubs-track" style={{'--fetan-crest-duration':Math.max(28,clubs.length*3.2)+'s'}}><div className="fetan-featured-clubs-set">{clubs.map((club,index)=>renderClub(club,index,0))}</div><div className="fetan-featured-clubs-set" aria-hidden="true">{clubs.map((club,index)=>renderClub(club,index,1))}</div></div></div>:<span className="fetan-featured-clubs-status">{loading?'Loading club crests…':'Club crests temporarily unavailable'}</span>}</div>;
 }
 
+function PulseCard(){
+ const [data,setData]=useState({loading:true,matches:[]});
+ useEffect(()=>{let alive=true;const load=()=>apiFetch('/matches?date='+dateInAddis()+'&league=english-premier-league').then(res=>{if(alive)setData({loading:false,matches:Array.isArray(res)?res:[]})}).catch(()=>{if(alive)setData({loading:false,matches:[]})});load();const t=setInterval(load,30000);return()=>{alive=false;clearInterval(t)}},[]);
+ const match=data.matches.find(m=>LIVE.has(statusOf(m)))||data.matches.find(m=>!FINISHED.has(statusOf(m)))||data.matches[0];
+ const live=match&&LIVE.has(statusOf(match));const done=match&&FINISHED.has(statusOf(match));
+ const initials=n=>teamName(match,n).split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+ return <aside className={'fa-pulse'+(live?' is-live':'')} aria-label="Matchday pulse">
+  <div className="fa-pulse-head"><span className="fa-pulse-tag">{live&&<i/>}{live?'LIVE NOW':done?'FULL TIME':'MATCHDAY'}</span><small>Premier League</small></div>
+  {data.loading?<div className="fa-pulse-body"><div className="fetan-skeleton" style={{height:84}}/></div>
+  :match?<Link to={'/match/'+encodeURIComponent(match.id)} className="fa-pulse-body">
+    <div className="fa-pulse-team"><span>{initials('home')}</span><b>{teamName(match,'home')}</b></div>
+    <div className="fa-pulse-score">{live||done?<strong>{score(match,'home')}<em>:</em>{score(match,'away')}</strong>:<strong className="vs">VS</strong>}<small>{live?(match.current_minute||0)+'′':done?'FT':new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Africa/Addis_Ababa'}).format(new Date(match.match_date))}</small></div>
+    <div className="fa-pulse-team"><span>{initials('away')}</span><b>{teamName(match,'away')}</b></div>
+  </Link>
+  :<div className="fa-pulse-body empty"><CalendarDays size={26}/><b>No fixtures listed today</b><small>Browse other leagues and upcoming matchdays.</small></div>}
+  <a href="#scores" className="fa-pulse-foot">Open match center <ArrowUpRight size={15}/></a>
+ </aside>;
+}
+function TrustBand(){
+ const cells=[['5','Top leagues covered'],['15s','Live match refresh'],['2','Languages, EN · አማ'],['0','Invented scores — ever']];
+ return <section className="fa-trust" aria-label="Why Fetan">{cells.map(([n,l])=><div className="fa-trust-cell" key={l}><b>{n}</b><span>{l}</span></div>)}</section>;
+}
 function EditorialLead({lang}){
  const [story,setStory]=useState(null);
  const [loading,setLoading]=useState(true);
@@ -68,6 +90,7 @@ function EditorialLead({lang}){
    <FeaturedClubs/>
    <div className="fetan-editorial-meta"><ShieldCheck size={14}/>{story?(story.source||'FETAN NEWSROOM'):'Football, without the noise.'}{loading?' · Updating desk…':''}</div>
   </div>
+  <PulseCard/>
  </section>;
 }
 function FavoriteEntry(){
@@ -84,6 +107,7 @@ function QuickDock(){
 export default function HomePage({lang='en',onNeedAuth}){
  return <main className="fetan-home">
    <EditorialLead lang={lang}/>
+   <TrustBand/>
    <QuickDock/>
    <div className="fetan-section-index"><span>01 / THE MATCH CENTER</span><span>LIVE · FIXTURES · RESULTS</span></div>
    <SafeSection><Suspense fallback={<div className="fetan-section-loading" aria-busy="true">Loading verified fixtures…</div>}><MatchCenter onNeedAuth={onNeedAuth}/></Suspense></SafeSection>
