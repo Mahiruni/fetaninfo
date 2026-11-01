@@ -14,6 +14,7 @@ import './velocity-rebrand.css';
 import './fetan-reference-brand.css';
 import './fetan-black-red.css';
 import './fetan-broadcast.css';
+import './fetan-editorial.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>
