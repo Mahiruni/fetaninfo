@@ -1,0 +1,49 @@
+/* FETAN match center — editorial broadcast design. Preserves original FETAN brand. */
+.score-swipe-surface{--broadcast:#f31f55;background:#08090c;color:#fff}
+.score-swipe-surface .fetan-match-toolbar{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding:32px 28px 25px!important;margin:0 0 14px!important;background:radial-gradient(ellipse at 92% 0%,#77192c77,transparent 48%),linear-gradient(115deg,#17191e,#08090c 75%);border-bottom:1px solid #ffffff1a;overflow:hidden}
+.score-swipe-surface .fetan-match-toolbar:before{content:'MATCHDAY';position:absolute;right:-15px;top:-24px;font-size:clamp(60px,12vw,190px);font-weight:950;letter-spacing:-.09em;color:#ffffff08;pointer-events:none}
+.score-swipe-surface .fetan-match-toolbar .eyebrow{font-size:11px!important;letter-spacing:.2em;color:#ff5275!important;font-weight:900}
+.score-swipe-surface .fetan-match-toolbar h2{font-size:clamp(32px,5vw,65px)!important;line-height:.99!important;letter-spacing:-.065em!important;font-weight:900!important;max-width:760px;margin:14px 0 13px!important}
+.score-swipe-surface .fetan-match-toolbar h2 em{font-style:normal;color:#ff315c}
+.score-swipe-surface .fetan-match-toolbar p{max-width:520px;font-size:13px!important;line-height:1.55;color:#a5a8b2!important;margin:0!important}
+.score-swipe-surface .match-head-actions{position:relative;z-index:1;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.score-swipe-surface .connection{border-radius:100px!important;background:#ffffff0b!important;border:1px solid #ffffff20!important;padding:10px 13px!important;color:#e1e2e7!important;font-size:11px!important}
+.score-swipe-surface .mini-refresh{border-radius:100px!important;min-height:40px!important;padding:0 14px!important;background:#f31f55!important;color:#fff!important;border:0!important;font-size:11px!important;font-weight:800!important;display:flex;align-items:center;gap:6px}
+.score-swipe-surface .league-switcher{display:flex;gap:8px;overflow-x:auto;padding:9px 22px 15px!important;margin:0!important;scrollbar-width:none;scroll-snap-type:x proximity}
+.score-swipe-surface .league-switcher::-webkit-scrollbar{display:none}
+.score-swipe-surface .league-switcher button{flex:0 0 auto!important;min-height:42px!important;border-radius:100px!important;padding:0 18px!important;background:#171a21!important;border:1px solid #ffffff20!important;color:#c8cbd2!important;font-size:12px!important;font-weight:800!important;box-shadow:none!important;scroll-snap-align:start}
+.score-swipe-surface .league-switcher button.active{background:#f31f55!important;border-color:#f31f55!important;color:white!important;box-shadow:0 8px 28px #f31f5530!important}
+.score-swipe-surface .free-feed-note{margin:0 22px 12px!important;padding:9px 12px!important;border-left:2px solid #f31f5577;background:#ffffff06!important;border-radius:0 8px 8px 0;font-size:10px!important;line-height:1.5!important;color:#9da0a9!important}
+.score-swipe-surface .matchday-quick-actions{margin:0 22px!important;padding:12px 0!important;gap:8px!important;border-bottom:1px solid #ffffff14}
+.score-swipe-surface .matchday-tz,.score-swipe-surface .matchday-updated{font-size:10px!important;color:#a7aab4!important}
+.score-swipe-surface .matchday-today{border-radius:100px!important;background:#ffffff0b!important;border:1px solid #ffffff24!important;color:#fff!important;font-size:10px!important;min-height:34px!important;padding:0 13px!important}
+.score-swipe-surface .mobile-score-controls{padding:10px 22px 16px!important;margin:0!important;background:#08090c}
+.score-swipe-surface .swipe-hint{display:none!important}
+.score-swipe-surface .date-strip{display:flex;gap:7px!important;overflow-x:auto;padding:0 0 12px!important;scrollbar-width:none}
+.score-swipe-surface .date-card{min-width:59px!important;width:59px!important;height:65px!important;min-height:65px!important;border-radius:12px!important;border:1px solid #ffffff19!important;background:#17191f!important;box-shadow:none!important;color:#b3b6c1!important;flex:0 0 auto!important}
+.score-swipe-surface .date-card.active{background:#f31f55!important;border-color:#f31f55!important;color:white!important}
+.score-swipe-surface .date-card small{font-size:9px!important;font-weight:850!important}
+.score-swipe-surface .date-card b{font-size:19px!important}
+.score-swipe-surface .filters{display:flex;gap:6px!important;overflow-x:auto;padding:0!important}
+.score-swipe-surface .filters button{border-radius:100px!important;min-height:36px!important;padding:0 15px!important;border:1px solid #ffffff1c!important;background:#181b22!important;color:#adb0b9!important;font-size:11px!important;font-weight:800!important;box-shadow:none!important}
+.score-swipe-surface .filters button.active{background:#fff!important;border-color:#fff!important;color:#101116!important}
+.score-swipe-surface .content-grid{gap:20px!important;padding:0 22px 30px!important}
+.score-swipe-surface .league-card{background:#11141a!important;border:1px solid #ffffff17!important;border-radius:14px!important;overflow:hidden!important;box-shadow:none!important;margin-bottom:14px!important}
+.score-swipe-surface .league-head{background:linear-gradient(100deg,#1c2028,#11141a)!important;padding:15px 17px!important;border-bottom:1px solid #ffffff18!important;min-height:64px!important}
+.score-swipe-surface .league-identity b{font-size:15px!important;letter-spacing:-.02em}
+.score-swipe-surface .league-identity small{font-size:10px!important;color:#8e929d!important}
+.score-swipe-surface .league-logo{background:transparent!important;border:0!important;box-shadow:none!important;color:#f31f55!important}
+.score-swipe-surface .league-head button{color:#ff6684!important;font-size:11px!important;font-weight:800!important}
+.score-swipe-surface .match-row{min-height:88px!important;display:grid!important;grid-template-columns:46px minmax(0,1fr) 25px 13px!important;gap:9px!important;padding:13px 14px!important;background:transparent!important;border-bottom:1px solid #ffffff12!important;border-radius:0!important}
+.score-swipe-surface .match-row:hover{background:#ffffff06!important}
+.score-swipe-surface .match-row>span:first-child{font-size:10px!important;font-weight:850!important;color:#a4a7b2!important}
+.score-swipe-surface .mini-teams{gap:8px!important}
+.score-swipe-surface .mini-teams>span{gap:10px!important;font-size:13px!important;font-weight:750!important;letter-spacing:-.015em}
+.score-swipe-surface .mini-logo-img{width:29px!important;height:29px!important;object-fit:contain!important;border:0!important;background:transparent!important;padding:0!important;border-radius:0!important}
+.score-swipe-surface .mini-teams i{background:#ffffff0c!important;border:1px solid #ffffff15!important;color:#8e929d!important;border-radius:7px!important;width:29px!important;height:29px!important}
+.score-swipe-surface .mini-score{gap:16px!important;font-size:14px!important}
+.score-swipe-surface .row-chevron{color:#7d828e!important}
+.score-swipe-surface .side-card{background:#11141a!important;border:1px solid #ffffff17!important;border-radius:14px!important;overflow:hidden}
+.score-swipe-surface .side-head{background:#1b1f26!important;border-bottom:1px solid #ffffff14!important}
+.score-swipe-surface .tiny-logo-img{object-fit:contain!important;background:transparent!important;border:0!important;padding:0!important;border-radius:0!important}
+@media(max-width:760px){.score-swipe-surface .fetan-match-toolbar{display:block!important;padding:25px 16px 19px!important}.score-swipe-surface .fetan-match-toolbar h2{font-size:38px!important;max-width:340px}.score-swipe-surface .fetan-match-toolbar p{font-size:11px!important}.score-swipe-surface .match-head-actions{margin-top:18px!important;justify-content:space-between!important}.score-swipe-surface .league-switcher{padding:7px 15px 12px!important}.score-swipe-surface .league-switcher button{font-size:11px!important;padding:0 15px!important}.score-swipe-surface .free-feed-note{margin:0 15px 8px!important;font-size:9px!important}.score-swipe-surface .matchday-quick-actions{margin:0 15px!important}.score-swipe-surface .mobile-score-controls{padding:10px 15px 14px!important}.score-swipe-surface .content-grid{padding:0 12px 25px!important;display:block!important}.score-swipe-surface .league-head{padding:13px 14px!important}.score-swipe-surface .match-row{grid-template-columns:40px minmax(0,1fr) 20px 12px!important;gap:7px!important;padding:12px 10px!important;min-height:81px!important}.score-swipe-surface .mini-teams>span{font-size:12px!important;gap:7px!important}.score-swipe-surface .mini-logo-img,.score-swipe-surface .mini-teams i{width:27px!important;height:27px!important}.score-swipe-surface .side-column{margin-top:14px!important}}
