@@ -1,0 +1,59 @@
+/* FETAN broadcast product experience — structural homepage and navigation */
+.fetan-home{overflow:hidden;background:#08090b;color:#fff}
+.fetan-global-header{position:relative;z-index:40}
+.fetan-global-header .topbar-inner{max-width:1440px;margin:auto;padding:0 26px;display:flex;justify-content:space-between;align-items:center}
+.fetan-brand-period{color:#f32648!important}
+.fetan-header-links{display:flex;gap:6px;align-items:center}
+.fetan-header-link{font-size:12px;font-weight:750;letter-spacing:.015em;color:#b3b3bb;padding:11px 13px;text-decoration:none;border-radius:9px}
+.fetan-header-link:hover,.fetan-header-link.active{color:#fff;background:#262027}
+.fetan-header-search{display:inline-flex;align-items:center;color:#ddd;padding:10px}
+.fetan-menu-toggle{display:none;align-items:center;justify-content:center;background:#17181d;color:white;border:1px solid #303037;border-radius:12px;width:43px;height:43px;cursor:pointer}
+.fetan-broadcast-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px max(26px,calc((100vw - 1360px)/2));background:#160e12;border-bottom:1px solid #362029;color:#aaa;font-size:10px;font-weight:800;letter-spacing:.15em}
+.fetan-broadcast-bar span:first-child{color:#fff;display:flex;align-items:center;gap:8px}.fetan-broadcast-bar i,.fetan-kicker-dot{display:inline-block;width:7px;height:7px;background:#f32648;border-radius:50%;box-shadow:0 0 0 4px #f3264822}
+.fetan-broadcast-bar a{display:flex;gap:6px;align-items:center;color:#ff647d;text-decoration:none}
+.fetan-drawer-backdrop{position:fixed;inset:0;z-index:90;background:#000b;display:flex;justify-content:flex-end}
+.fetan-drawer{width:min(355px,88vw);height:100%;background:#111216;border-left:1px solid #34343a;padding:26px 20px;display:flex;flex-direction:column;gap:7px;box-shadow:-20px 0 70px #0008}
+.fetan-drawer-head{display:flex;justify-content:space-between;align-items:center;padding:10px 7px 25px;color:#ff526e;font-size:12px;letter-spacing:.13em}
+.fetan-drawer-head button{background:#26272c;color:#fff;border:0;border-radius:9px;padding:8px}
+.fetan-drawer>a{display:flex;gap:14px;align-items:center;text-decoration:none;color:#eee;border:1px solid transparent;border-radius:13px;padding:17px 13px;font-weight:750}
+.fetan-drawer>a svg:last-child{margin-left:auto;color:#ff526e}
+.fetan-drawer>a:hover,.fetan-drawer>a.selected{background:#26161c;border-color:#4b2732}
+.fetan-drawer-foot{margin-top:auto;border-top:1px solid #303037;padding:22px 8px;font-size:10px;letter-spacing:.17em;color:#999}
+.fetan-spotlight{max-width:1380px;margin:auto;padding:70px 28px 72px;display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;min-height:520px}
+.fetan-spotlight-copy{max-width:650px}
+.fetan-kicker{display:flex;align-items:center;gap:14px;color:#ff5c75;font-size:11px;letter-spacing:.19em;font-weight:850}
+.fetan-kicker-line{height:1px;width:55px;background:#67313c}
+.fetan-spotlight h1{font-size:clamp(53px,6.8vw,108px)!important;line-height:.99!important;letter-spacing:-.07em!important;font-weight:900!important;margin:25px 0!important;color:white!important}
+.fetan-spotlight h1 em{font-style:normal;color:#f32648}
+.fetan-spotlight-copy>p{max-width:480px;font-size:clamp(15px,1.45vw,19px);line-height:1.65;color:#b1b1b9;margin:24px 0}
+.fetan-hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.fetan-primary-cta,.fetan-secondary-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:51px;padding:0 19px;border-radius:11px;text-decoration:none;font-weight:800;font-size:13px}
+.fetan-primary-cta{background:#f32648;color:white!important}.fetan-primary-cta:hover{background:#d7193c}
+.fetan-secondary-cta{border:1px solid #424248;color:#eee}
+.fetan-hero-trust{display:flex;align-items:center;gap:8px;color:#85858d;font-size:11px;margin-top:27px}
+.fetan-spotlight-panel{background:linear-gradient(155deg,#222027,#111216 60%);border:1px solid #373139;border-radius:23px;min-height:380px;display:flex;flex-direction:column;box-shadow:0 32px 100px #0009;overflow:hidden}
+.fetan-panel-top,.fetan-panel-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:21px 23px;color:#aaa;font-size:10px;font-weight:800;letter-spacing:.11em}
+.fetan-panel-top{border-bottom:1px solid #383039}.fetan-panel-top>span:first-child{display:flex;align-items:center;gap:12px;color:#fff}
+.fetan-panel-bottom{margin-top:auto;border-top:1px solid #343039;color:#74737b}
+.fetan-feature-match{padding:26px 20px;text-align:center}
+.fetan-match-status{font-size:10px;letter-spacing:.17em;font-weight:850;color:#ff637b;margin-bottom:25px}
+.fetan-feature-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.fetan-feature-teams>div:not(.fetan-feature-score){display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.fetan-feature-teams strong{font-size:13px;overflow-wrap:anywhere}
+.fetan-team-initial{width:65px;height:65px;border:1px solid #56414a;border-radius:17px;background:#2b1b23;display:grid;place-items:center;color:#fff;font-size:21px;font-weight:900}
+.fetan-feature-score{font-size:32px;font-weight:900;letter-spacing:-.06em;white-space:nowrap}.fetan-feature-score span{color:#f32648}
+.fetan-panel-link{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;margin-top:29px;font-size:12px;font-weight:800}
+.fetan-pulse-empty{padding:35px 25px;text-align:center;display:flex;align-items:center;flex-direction:column;gap:14px;color:#aaa}
+.fetan-pulse-empty strong{color:#fff;font-size:18px}.fetan-pulse-empty p{font-size:13px;max-width:280px}.fetan-pulse-empty a{color:#ff6b81}
+.fetan-skeleton{width:70%;height:17px;background:#303037;border-radius:8px;animation:fetan-pulse 1.4s ease-in-out infinite alternate}.fetan-skeleton.short{width:44%}
+@keyframes fetan-pulse{to{opacity:.3}}
+.fetan-section-index{max-width:1380px;margin:0 auto;padding:20px 28px;border-top:1px solid #303037;display:flex;justify-content:space-between;align-items:center;color:#ff647d;font-size:11px;font-weight:850;letter-spacing:.15em}
+.fetan-section-index span:last-child{color:#85858d}.fetan-section-index a{display:flex;align-items:center;gap:6px;color:#ddd;text-decoration:none}
+.fetan-home .home-extras{padding-top:8px;padding-bottom:56px}
+.fetan-section-loading,.fetan-section-error{padding:50px 28px;text-align:center;color:#aaa}
+.fetan-final-cta{max-width:1324px;margin:30px auto 70px;padding:42px;background:linear-gradient(125deg,#281019,#111216 75%);border:1px solid #51303a;border-radius:22px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.fetan-final-cta span{font-size:10px;color:#ff657c;letter-spacing:.18em;font-weight:850}
+.fetan-final-cta h2{font-size:clamp(27px,4vw,50px)!important;margin:10px 0!important}.fetan-final-cta p{color:#aaa}
+.fetan-final-cta>a{display:flex;gap:10px;align-items:center;padding:15px 20px;background:#f32648;border-radius:10px;color:white;text-decoration:none;font-weight:800;white-space:nowrap}
+@media(max-width:950px){.fetan-header-links{display:none}.fetan-menu-toggle{display:flex}.fetan-spotlight{grid-template-columns:1fr;padding-top:44px;gap:30px;min-height:0}.fetan-spotlight-copy{max-width:none}.fetan-spotlight-panel{min-height:330px}}
+@media(max-width:650px){.fetan-global-header .topbar-inner{padding:0 15px;min-height:63px!important}.fetan-header-search,.fetan-global-header .signin-btn,.fetan-global-header .profile-chip{display:none!important}.fetan-global-header .header-actions{gap:6px}.fetan-broadcast-bar{padding:9px 15px;font-size:8px}.fetan-broadcast-bar>span:nth-child(2){display:none}.fetan-spotlight{padding:37px 17px 48px;gap:30px}.fetan-spotlight h1{font-size:clamp(50px,12vw,74px)!important;margin:19px 0!important}.fetan-spotlight-copy>p{font-size:14px;line-height:1.65}.fetan-primary-cta,.fetan-secondary-cta{min-height:46px;font-size:12px;padding:0 14px}.fetan-hero-trust{font-size:10px;line-height:1.4}.fetan-spotlight-panel{min-height:325px;border-radius:17px}.fetan-section-index{padding:18px 16px;font-size:9px;letter-spacing:.1em}.fetan-final-cta{margin:20px 16px 50px;padding:26px 21px;flex-direction:column;align-items:flex-start}.fetan-final-cta>a{width:100%;justify-content:center}.bottom-nav{display:none!important}body{padding-bottom:0!important}}
