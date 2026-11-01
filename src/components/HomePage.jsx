@@ -44,6 +44,12 @@ function Spotlight(){
    </div>
  </section>;
 }
+function FeaturedClubs(){
+ const [clubs,setClubs]=useState([]);
+ useEffect(()=>{let active=true;apiFetch('/matches?date='+dateInAddis()+'&league=english-premier-league').then(rows=>{if(!active||!Array.isArray(rows))return;const seen=new Set();const next=[];for(const m of rows){for(const side of ['home','away']){const name=m[side+'_en'];const logo=m[side+'_logo'];if(!name||seen.has(name.toLowerCase()))continue;seen.add(name.toLowerCase());next.push({name,logo});if(next.length===6)break}if(next.length===6)break}setClubs(next)}).catch(()=>{});return()=>{active=false}},[]);
+ if(!clubs.length)return null;
+ return <div className="fetan-featured-clubs" aria-label="Clubs featured in today's Premier League fixtures"><span className="fetan-featured-clubs-title">MATCHDAY CLUBS</span><div className="fetan-featured-clubs-row">{clubs.map(club=><div className="fetan-featured-club" key={club.name}>{club.logo?<img src={club.logo} alt={club.name+' crest'} loading="eager" decoding="async" referrerPolicy="no-referrer" onError={e=>{e.currentTarget.style.display='none';e.currentTarget.nextElementSibling.hidden=false}}/>:null}<span className="fetan-featured-club-fallback" hidden={Boolean(club.logo)}>{club.name.slice(0,2).toUpperCase()}</span><small>{club.name}</small></div>)}</div></div>;
+}
 function EditorialLead({lang}){
  const [story,setStory]=useState(null);
  const [loading,setLoading]=useState(true);
@@ -57,6 +63,7 @@ function EditorialLead({lang}){
    <h1 id="fetan-editorial-title">{title}</h1>
    <p>{summary}</p>
    <div className="fetan-editorial-actions">{story?<Link className="fetan-primary-cta" to={'/news/'+story.slug}>Read the story <ArrowUpRight size={17}/></Link>:<Link className="fetan-primary-cta" to="/news">Explore the newsroom <ArrowUpRight size={17}/></Link>}<a href="#scores" className="fetan-secondary-cta">Live match center <Radio size={17}/></a></div>
+   <FeaturedClubs/>
    <div className="fetan-editorial-meta"><ShieldCheck size={14}/>{story?(story.source||'FETAN NEWSROOM'):'Football, without the noise.'}{loading?' · Updating desk…':''}</div>
   </div>
  </section>;
