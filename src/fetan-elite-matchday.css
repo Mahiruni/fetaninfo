@@ -1,0 +1,27 @@
+/* FETAN ELITE MATCHDAY 04 — broadcast-grade mobile score center */
+.score-swipe-surface{background:#08090d!important;color:#f7f8fa}
+.score-swipe-surface .fetan-match-toolbar{padding:28px 20px 22px!important;background:radial-gradient(ellipse at 100% 0%,#7a18314a,transparent 55%),#090b10!important}
+.score-swipe-surface .fetan-match-toolbar:before{content:'LIVE'!important;top:0!important;right:10px!important;font-size:clamp(85px,15vw,220px)!important;color:#ffffff05!important;letter-spacing:-.07em!important}
+.score-swipe-surface .fetan-match-toolbar h2{font-size:clamp(38px,6vw,74px)!important;line-height:1.02!important;letter-spacing:-.06em!important;margin:12px 0!important}
+.score-swipe-surface .fetan-match-toolbar h2 em{color:#ff315f!important}
+.score-swipe-surface .league-switcher{gap:7px!important}
+.score-swipe-surface .league-switcher button{min-height:38px!important;font-size:11px!important}
+.score-swipe-surface .mobile-score-controls{background:transparent!important}
+.score-swipe-surface .date-strip{align-items:stretch!important}
+.score-swipe-surface .date-card{min-width:52px!important;width:52px!important;min-height:59px!important;height:59px!important}
+.score-swipe-surface .date-card.calendar{position:relative!important;overflow:hidden!important}
+.score-swipe-surface .date-card.calendar input{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:0!important;cursor:pointer!important;font-size:0!important;color:transparent!important;background:transparent!important}
+.score-swipe-surface .filters button{min-height:33px!important;padding:0 13px!important}
+.score-swipe-surface .league-card,.score-swipe-surface .side-card{background:#11131a!important;border:1px solid #ffffff1b!important;border-radius:16px!important}
+.score-swipe-surface .league-head{background:#181b23!important}
+.score-swipe-surface .match-row{background:#11131a!important}
+.score-swipe-surface .mini-teams i,.score-swipe-surface .tiny-team{background:transparent!important;border:0!important;box-shadow:none!important;color:#757a88!important}
+.score-swipe-surface .mini-logo-img,.score-swipe-surface .tiny-logo-img,.score-swipe-surface .team-badge img,.score-swipe-surface .league-logo img{background:transparent!important;background-color:transparent!important;border:0!important;outline:0!important;box-shadow:none!important;border-radius:0!important;object-fit:contain!important;padding:0!important;filter:none!important}
+.score-swipe-surface .league-logo{background:transparent!important;border:0!important;border-radius:0!important}
+.score-swipe-surface .standing-row{background:#11131a!important;border-bottom:1px solid #ffffff14!important}
+.score-swipe-surface .standing-row>span:nth-child(2){display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important}
+.score-swipe-surface .standing-row .tiny-logo-img{width:25px!important;height:25px!important;min-width:25px!important;flex:none!important}
+.score-swipe-surface .standing-row b:last-child{color:#ff3a68!important}
+.score-swipe-surface .table-head{background:#191d27!important;color:#9ca3b2!important}
+.score-swipe-surface .side-head{background:#171a22!important}
+@media(max-width:760px){.score-swipe-surface .fetan-match-toolbar{padding:23px 16px 18px!important}.score-swipe-surface .fetan-match-toolbar h2{font-size:43px!important}.score-swipe-surface .fetan-match-toolbar p{font-size:11px!important}.score-swipe-surface .date-card{min-width:50px!important;width:50px!important;height:58px!important;min-height:58px!important}.score-swipe-surface .league-head{min-height:58px!important}.score-swipe-surface .match-row{min-height:74px!important}.score-swipe-surface .standing-row .tiny-logo-img{width:23px!important;height:23px!important;min-width:23px!important}}
