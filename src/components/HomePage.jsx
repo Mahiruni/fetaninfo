@@ -1,6 +1,6 @@
 import { Component, lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, CalendarDays, ChevronRight, Radio, ShieldCheck, Trophy, Newspaper } from 'lucide-react';
+import { ArrowUpRight, CalendarDays, ChevronRight, Radio, ShieldCheck, Trophy, Newspaper, Star, Clock3 } from 'lucide-react';
 import { apiFetch } from '../api';
 
 const MatchCenter=lazy(()=>import('./MatchCenter'));
@@ -44,8 +44,34 @@ function Spotlight(){
    </div>
  </section>;
 }
+function EditorialLead({lang}){
+ const [story,setStory]=useState(null);
+ const [loading,setLoading]=useState(true);
+ useEffect(()=>{let active=true;apiFetch('/news').then(items=>{if(active&&Array.isArray(items))setStory(items.find(item=>item&&item.slug&&!item.demo)||null)}).catch(()=>{}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[]);
+ const title=story?(lang==='am'?(story.titleAm||story.titleEn):(story.titleEn||story.titleAm)):'The world’s game. One destination.';
+ const summary=story?(lang==='am'?(story.summaryAm||story.summaryEn):(story.summaryEn||story.summaryAm)):'Breaking football stories, live match intelligence and every moment that matters. All in one place.';
+ return <section className="fetan-editorial-hero" aria-labelledby="fetan-editorial-title">
+  <div className="fetan-editorial-visual" aria-hidden="true"><div className="fetan-editorial-halo"/><div className="fetan-editorial-glyph">F<span>.</span></div><div className="fetan-editorial-grid"/></div>
+  <div className="fetan-editorial-content">
+   <span className="fetan-editorial-label"><span className="fetan-kicker-dot"/> {story?'THE LATEST / VERIFIED NEWS':'FETAN / GLOBAL FOOTBALL'}</span>
+   <h1 id="fetan-editorial-title">{title}</h1>
+   <p>{summary}</p>
+   <div className="fetan-editorial-actions">{story?<Link className="fetan-primary-cta" to={'/news/'+story.slug}>Read the story <ArrowUpRight size={17}/></Link>:<Link className="fetan-primary-cta" to="/news">Explore the newsroom <ArrowUpRight size={17}/></Link>}<a href="#scores" className="fetan-secondary-cta">Live match center <Radio size={17}/></a></div>
+   <div className="fetan-editorial-meta"><ShieldCheck size={14}/>{story?(story.source||'FETAN NEWSROOM'):'Football, without the noise.'}{loading?' · Updating desk…':''}</div>
+  </div>
+ </section>;
+}
+function FavoriteEntry(){
+ const [club,setClub]=useState(()=>{try{return localStorage.getItem('fetan_favorite_club')||''}catch{return ''}});
+ const [editing,setEditing]=useState(false);
+ const [draft,setDraft]=useState(club);
+ function save(e){e.preventDefault();const clean=draft.trim().slice(0,60);try{if(clean)localStorage.setItem('fetan_favorite_club',clean);else localStorage.removeItem('fetan_favorite_club')}catch{}setClub(clean);setEditing(false)}
+ return <section className="fetan-favorites-entry"><div className="fetan-favorites-icon"><Star size={21}/></div><div><span>03 / YOUR FOOTBALL</span><h2>{club?'Following '+club:'Make FETAN yours.'}</h2><p>{club?'Your favorite club is saved on this device. Personalized fixtures and alerts are coming next.':'Start with your favorite club. A personal football experience begins here.'}</p></div>{editing?<form onSubmit={save} className="fetan-favorite-form"><input aria-label="Favorite club" maxLength={60} value={draft} onChange={e=>setDraft(e.target.value)} placeholder="Your favorite club"/><button type="submit">Save</button></form>:<button className="fetan-favorite-button" onClick={()=>{setDraft(club);setEditing(true)}}>{club?'Edit favorite':'Choose a club'} <ArrowUpRight size={15}/></button>}</section>;
+}
 export default function HomePage({lang='en',onNeedAuth}){
  return <main className="fetan-home">
+   <EditorialLead lang={lang}/>
+   <div className="fetan-spotlight-label"><span>THE MATCHDAY EXPERIENCE</span><span>REAL DATA. REAL FOOTBALL.</span></div>
    <Spotlight/>
    <div className="fetan-section-index"><span>01 / THE MATCH CENTER</span><span>LIVE · FIXTURES · RESULTS</span></div>
    <SafeSection><Suspense fallback={<div className="fetan-section-loading" aria-busy="true">Loading verified fixtures…</div>}><MatchCenter onNeedAuth={onNeedAuth}/></Suspense></SafeSection>
@@ -53,6 +79,7 @@ export default function HomePage({lang='en',onNeedAuth}){
    <SafeSection><Suspense fallback={null}><div className="page home-extras"><CompetitionHub lang={lang} compact/></div></Suspense></SafeSection>
    <div className="fetan-section-index"><span>03 / THE NEWSROOM</span><Link to="/news">READ STORIES <ArrowUpRight size={13}/></Link></div>
    <SafeSection><Suspense fallback={null}><div className="page home-extras"><NewsHub lang={lang} compact/></div></Suspense></SafeSection>
+   <FavoriteEntry/>
    <section className="fetan-final-cta"><div><span>THE NEXT GENERATION OF FOOTBALL</span><h2>Football belongs to everyone.</h2><p>One destination for the matches, competitions and stories that matter.</p></div><Link to="/competitions">Explore football <Trophy size={18}/></Link></section>
  </main>;
 }
