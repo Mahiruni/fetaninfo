@@ -18,6 +18,7 @@ import './fetan-editorial.css';
 import './fetan-single-hero.css';
 import './fetan-club-crests.css';
 import './fetan-fire.css';
+import './fetan-match-premium.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>
