@@ -71,8 +71,6 @@ function FavoriteEntry(){
 export default function HomePage({lang='en',onNeedAuth}){
  return <main className="fetan-home">
    <EditorialLead lang={lang}/>
-   <div className="fetan-spotlight-label"><span>THE MATCHDAY EXPERIENCE</span><span>REAL DATA. REAL FOOTBALL.</span></div>
-   <Spotlight/>
    <div className="fetan-section-index"><span>01 / THE MATCH CENTER</span><span>LIVE · FIXTURES · RESULTS</span></div>
    <SafeSection><Suspense fallback={<div className="fetan-section-loading" aria-busy="true">Loading verified fixtures…</div>}><MatchCenter onNeedAuth={onNeedAuth}/></Suspense></SafeSection>
    <div className="fetan-section-index"><span>02 / THE COMPETITIONS</span><Link to="/competitions">EXPLORE ALL <ArrowUpRight size={13}/></Link></div>
