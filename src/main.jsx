@@ -31,7 +31,7 @@ if ('serviceWorker' in navigator) {
 
       if (hadController) {
         navigator.serviceWorker.addEventListener('controllerchange', () => {
-          const key = 'ethio-sw-refresh-v8';
+          const key = 'fetan-sw-refresh-v9';
           if (sessionStorage.getItem(key)) return;
           sessionStorage.setItem(key, '1');
           window.location.reload();
