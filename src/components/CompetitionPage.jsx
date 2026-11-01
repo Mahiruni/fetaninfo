@@ -17,6 +17,7 @@ export default function CompetitionPage({lang='en'}){
   const fallback=findCompetition(slug);
   const[data,setData]=useState(fallback?{competition:fallback,matches:[],standings:[],demo:true,live:false}:null);
   const[teams,setTeams]=useState([]);
+  const[clubCrests,setClubCrests]=useState({});
   const[stories,setStories]=useState(()=>demoArticles.filter(a=>a.competitionSlug===slug));
   const[tab,setTab]=useState('overview');
   const[loading,setLoading]=useState(Boolean(fallback));
@@ -24,12 +25,20 @@ export default function CompetitionPage({lang='en'}){
   useEffect(()=>{
     if(!fallback)return;
     setData({competition:fallback,matches:[],standings:[],demo:true,live:false});setLoading(true);
-    Promise.allSettled([apiFetch(`/competitions/${slug}`),apiFetch('/teams'),apiFetch(`/news?competition=${slug}`)]).then(([competitionResult,teamsResult,newsResult])=>{
+    let active=true;
+    Promise.allSettled([apiFetch(`/competitions/${slug}`),apiFetch('/teams'),apiFetch(`/news?competition=${slug}`),apiFetch(`/club-crests?league=${slug}`)]).then(([competitionResult,teamsResult,newsResult,crestsResult])=>{
+      if(!active)return;
+      if(crestsResult.status==='fulfilled'&&Array.isArray(crestsResult.value)){
+        const byName={};
+        for(const team of crestsResult.value){if(team?.name&&team?.logo)byName[norm(team.name)]=team.logo;}
+        setClubCrests(byName);
+      }else setClubCrests({});
       if(competitionResult.status==='fulfilled')setData(competitionResult.value);
       if(teamsResult.status==='fulfilled')setTeams(teamsResult.value||[]);
       if(newsResult.status==='fulfilled'&&Array.isArray(newsResult.value)&&newsResult.value.length)setStories(newsResult.value);
       else setStories(demoArticles.filter(a=>a.competitionSlug===slug));
-    }).finally(()=>setLoading(false));
+    }).finally(()=>{if(active)setLoading(false)});
+    return()=>{active=false};
   },[slug]);
   if(!fallback)return <Navigate to="/competitions" replace/>;
 
@@ -37,7 +46,7 @@ export default function CompetitionPage({lang='en'}){
   const matches=data?.matches||[];
   const standings=data?.standings||[];
   const tabs=[['overview','Overview'],['fixtures','Fixtures'],['table','Table'],['news','News']];
-  const logoFor=(name,provided)=>provided||teams.find(t=>norm(t.name_en)===norm(name)||norm(t.name_am)===norm(name))?.logo_url||'';
+  const logoFor=(name,provided)=>provided||clubCrests[norm(name)]||teams.find(t=>norm(t.name_en)===norm(name)||norm(t.name_am)===norm(name))?.logo_url||'';
   const statusText=data?.live?'Live data':data?.providerError?'Provider offline':data?.source==='local-news'?'News coverage':'Directory mode';
 
   return <main className="page content-page competition-detail-page">
