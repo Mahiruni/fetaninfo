@@ -1,0 +1,17 @@
+/* FETAN floating glass navigation: compact, touch-friendly, safe-area aware. */
+@media(max-width:950px){
+  body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))!important}
+  .bottom-nav{position:fixed!important;display:flex!important;left:50%!important;right:auto!important;bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;top:auto!important;transform:translateX(-50%)!important;z-index:85!important;width:min(520px,calc(100% - 24px))!important;height:70px!important;min-height:70px!important;padding:7px!important;margin:0!important;gap:3px!important;align-items:stretch!important;justify-content:space-around!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:24px!important;background:linear-gradient(145deg,rgba(38,42,53,.77),rgba(12,13,19,.85))!important;-webkit-backdrop-filter:blur(26px) saturate(170%)!important;backdrop-filter:blur(26px) saturate(170%)!important;box-shadow:0 15px 45px #000a,inset 0 1px 0 #ffffff26!important;overflow:visible!important}
+  .bottom-nav:before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,#ffffff12,transparent 48%,#ffffff08)}
+  .bottom-nav button{position:relative;flex:1 1 0!important;min-width:0!important;min-height:54px!important;height:54px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;border:0!important;border-radius:17px!important;background:transparent!important;color:#b4b8c4!important;box-shadow:none!important;padding:4px 2px!important;transition:background .2s ease,color .2s ease,transform .2s ease!important}
+  .bottom-nav button svg{width:21px!important;height:21px!important;flex:none!important;stroke-width:2!important}
+  .bottom-nav button span{font-size:10px!important;line-height:1!important;font-weight:750!important;letter-spacing:-.01em!important;white-space:nowrap!important}
+  .bottom-nav button.active,.bottom-nav button[aria-current=page]{background:linear-gradient(160deg,rgba(243,31,85,.28),rgba(243,31,85,.11))!important;color:#fff!important;box-shadow:inset 0 0 0 1px #f31f5555!important}
+  .bottom-nav button.active svg,.bottom-nav button[aria-current=page] svg{color:#ff4e7c!important;filter:drop-shadow(0 0 7px #f31f5588)}
+  .bottom-nav button:focus-visible{outline:2px solid #ff7c9e!important;outline-offset:2px}
+  .bottom-nav button:active{transform:scale(.94)!important}
+}
+@media(max-width:650px){.bottom-nav{display:flex!important}body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))!important}}
+@media(max-width:360px){.bottom-nav{width:calc(100% - 14px)!important;padding:5px!important;gap:0!important}.bottom-nav button span{font-size:9px!important}}
+@media(min-width:951px){.bottom-nav{display:none!important}}
+@media(prefers-reduced-motion:reduce){.bottom-nav button{transition:none!important}}
