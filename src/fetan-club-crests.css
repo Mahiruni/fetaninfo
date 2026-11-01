@@ -28,3 +28,7 @@
 .fetan-featured-club img,.fetan-featured-club-fallback{width:40px!important;height:40px!important;max-width:40px!important;object-fit:contain!important}
 .fetan-featured-club small{width:42px!important;max-width:42px!important;font-size:6px!important;line-height:1.1!important;letter-spacing:-.02em!important;overflow-wrap:anywhere!important}
 @media(max-width:650px){.fetan-featured-club{width:38px!important;min-width:38px!important;max-width:38px!important;flex-basis:38px!important}.fetan-featured-club img,.fetan-featured-club-fallback{width:37px!important;height:37px!important}.fetan-featured-club small{width:38px!important;max-width:38px!important;font-size:6px!important}}
+
+/* Balanced breathing room between the compact club crests. */
+.fetan-featured-clubs-set{gap:9px!important;padding-right:9px!important}
+@media(max-width:650px){.fetan-featured-clubs-set{gap:7px!important;padding-right:7px!important}}
