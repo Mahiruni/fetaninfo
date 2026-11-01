@@ -11,8 +11,8 @@ const LIVE=new Set(['LIVE','1H','HT','2H','ET','P','BT']);
 const FINISHED=new Set(['FT','AET','PEN']);
 const dateInAddis=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Addis_Ababa',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const statusOf=m=>String(m.status||'').toUpperCase();
-const teamName=(m,side)=>String(m[side+'Team']?.name||m[side+'_team']?.name||m[side+'_team_name']||m[side]||'TBD');
-const score=(m,side)=>m[side+'Score']??m[side+'_score']??m.score?.[side]??'–';
+const teamName=(m,side)=>String(m[side+'_en']||m[side+'Team']?.name||m[side+'_team']?.name||m[side+'_team_name']||m[side]||'TBD');
+const score=(m,side)=>m[side+'_score']??m[side+'Score']??m.score?.[side]??'–';
 
 class SafeSection extends Component{
  constructor(props){super(props);this.state={failed:false}}
@@ -38,7 +38,7 @@ function Spotlight(){
      {data.loading?<div className="fetan-pulse-empty" aria-busy="true"><div className="fetan-skeleton"/><div className="fetan-skeleton short"/><p>Checking matchday fixtures…</p></div>:match?<div className="fetan-feature-match">
        <div className="fetan-match-status">{live?'● LIVE':FINISHED.has(statusOf(match))?'FULL TIME':'MATCHDAY FIXTURE'}</div>
        <div className="fetan-feature-teams"><div><span className="fetan-team-initial">{teamName(match,'home').slice(0,2).toUpperCase()}</span><strong>{teamName(match,'home')}</strong></div><div className="fetan-feature-score">{live||FINISHED.has(statusOf(match))?<>{score(match,'home')} <span>:</span> {score(match,'away')}</>:<span>VS</span>}</div><div><span className="fetan-team-initial">{teamName(match,'away').slice(0,2).toUpperCase()}</span><strong>{teamName(match,'away')}</strong></div></div>
-       <a href="#scores" className="fetan-panel-link">View matchday fixtures <ArrowUpRight size={16}/></a>
+       <Link to={match.id?'/match/'+encodeURIComponent(match.id):'/'} className="fetan-panel-link">{match.id?'Open match details':'View matchday fixtures'} <ArrowUpRight size={16}/></Link>
      </div>:<div className="fetan-pulse-empty"><CalendarDays size={34}/><strong>{data.error?'Match feed temporarily unavailable':'No Premier League fixtures listed today'}</strong><p>{data.error?'Check the match center for other available competitions.':'Explore other competitions and upcoming matchdays below.'}</p><a href="#scores">Open match center <ArrowUpRight size={14}/></a></div>}
      <div className="fetan-panel-bottom"><span>FETAN / FOOTBALL INTELLIGENCE</span><span>01 — 03</span></div>
    </div>
