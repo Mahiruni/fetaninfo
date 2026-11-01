@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, BarChart3, Bell, CalendarClock, ChevronRight, CircleAlert, Clock3, Goal, MapPin, MessageCircle, RefreshCw, Send, Share2, Shield, Shirt, Trophy, UsersRound } from 'lucide-react';
+import { ArrowLeft, BarChart3, Bell, CalendarClock, ChevronRight, CircleAlert, Clock3, Flag, Globe, Goal, Hourglass, MapPin, MessageCircle, RefreshCw, Send, Share2, Shield, Shirt, Timer, Trophy, UsersRound } from 'lucide-react';
 import { apiFetch } from '../api';
 import { useAuth } from '../context/AuthContext';
 import '../match-details.css';
@@ -40,7 +40,7 @@ export default function MatchDetails({ onNeedAuth }){
   const status=String(match.status||'Scheduled').toUpperCase();
   const statusText=liveStatuses.has(status)?`${match.current_minute||0}′ · LIVE`:finishedStatuses.has(status)?status:prettyTime(match.match_date);
 
-  return <main className="page match-detail-page">
+  return <main className="page match-detail-page mc">
     {notice&&<div className="toast-note">{notice}</div>}
     <div className="detail-toolbar">
       <button className="back-link" onClick={()=>navigate(-1)}><ArrowLeft size={16}/> Back</button>
@@ -72,7 +72,7 @@ export default function MatchDetails({ onNeedAuth }){
         {tab==='community'&&<Community localId={localId} chat={chat} message={message} setMessage={setMessage} send={send} poll={poll} vote={vote} voteBusy={voteBusy} pct={pct} total={total} auth={auth}/>} 
       </section>
       <aside className="detail-side">
-        <section className="detail-card quick-card"><div className="detail-card-head"><b>Match status</b><span className={liveStatuses.has(status)?'status-dot live':'status-dot'}/></div><div className="quick-grid"><div><CalendarClock size={17}/><span>Kickoff</span><b>{prettyTime(match.match_date)}</b></div><div><MapPin size={17}/><span>Venue</span><b>{match.venue_name||'TBC'}</b></div><div><Trophy size={17}/><span>Competition</span><b>{match.league_name||'—'}</b></div><div><Bell size={17}/><span>Updates</span><b>{data?.source==='API-Football'?'Live feed':'Stored data'}</b></div></div></section>
+        <section className="detail-card quick-card mc-card"><div className="detail-card-head"><b>Match status</b><span className={liveStatuses.has(status)?'status-dot live':'status-dot'}/></div><div className="quick-grid"><div><span className="mc-chip"><CalendarClock size={16}/></span><span>Kickoff</span><b>{prettyTime(match.match_date)}</b></div><div><span className="mc-chip"><MapPin size={16}/></span><span>Venue</span><b>{match.venue_name||'TBC'}</b></div><div><span className="mc-chip"><Trophy size={16}/></span><span>Competition</span><b>{match.league_name||'—'}</b></div><div><span className="mc-chip"><Bell size={16}/></span><span>Updates</span><b>{data?.source==='API-Football'?'Live feed':'Stored data'}</b></div></div></section>
         <section className="detail-card data-card"><div className="detail-card-head"><b>Data quality</b><small>{data?.source||'Preview'}</small></div><p>{data?.source==='API-Football'?'Scores and match-detail modules are supplied by the configured live football provider. Availability of lineups, detailed statistics and events depends on competition coverage.':'This match is using stored or preview data. Connect the live provider for live events, lineups and detailed statistics.'}</p></section>
       </aside>
     </div>
@@ -83,9 +83,40 @@ function HeroTeam({name,logo}){return <div className="hero-team"><span className
 function DetailSkeleton(){return <><div className="skeleton hero-skeleton"/><div className="skeleton tabs-skeleton"/><div className="skeleton body-skeleton"/></>}
 function Empty({icon:Icon=CircleAlert,title,text}){return <div className="module-empty"><Icon size={24}/><b>{title}</b><p>{text}</p></div>}
 
+function Countdown({date}){
+  const [now,setNow]=useState(Date.now());
+  useEffect(()=>{const t=setInterval(()=>setNow(Date.now()),1000);return()=>clearInterval(t)},[]);
+  const diff=new Date(date).getTime()-now;
+  if(!date||!Number.isFinite(diff)||diff<=0)return null;
+  const s=Math.floor(diff/1000);
+  const parts=[['Days',Math.floor(s/86400)],['Hrs',Math.floor(s%86400/3600)],['Min',Math.floor(s%3600/60)],['Sec',s%60]];
+  return <div className="mc-countdown" role="timer" aria-label="Time until kickoff"><span className="mc-countdown-label"><Timer size={14}/>Kickoff in</span><div>{parts.map(([label,v])=><div className="mc-cd-cell" key={label}><b>{String(v).padStart(2,'0')}</b><small>{label}</small></div>)}</div></div>;
+}
+
 function Overview({data,match}){
-  const events=data?.events||[];const keyEvents=events.filter(e=>['Goal','Card','subst'].some(x=>String(e.type||e.detail||'').toLowerCase().includes(x.toLowerCase()))).slice(-6).reverse();
-  return <div className="module-stack"><section className="detail-card"><div className="detail-card-head"><b>Match overview</b><small>{match.status_long||match.status}</small></div><div className="overview-grid"><div><span>Half-time</span><b>{match.home_halftime??'—'} : {match.away_halftime??'—'}</b></div><div><span>Round</span><b>{match.round||'—'}</b></div><div><span>Referee</span><b>{match.referee||'TBC'}</b></div><div><span>Timezone</span><b>{match.timezone||'Africa/Addis_Ababa'}</b></div></div></section><section className="detail-card"><div className="detail-card-head"><b>Key moments</b><small>{events.length} events</small></div>{keyEvents.length?<div className="moment-list">{keyEvents.map(e=><div key={e.id} className="moment-row"><span className="minute-chip">{e.minute}′</span><span className="event-icon">{String(e.type).toLowerCase().includes('goal')?<Goal size={16}/>:<Shield size={16}/>}</span><div><b>{e.detail||e.type}</b><small>{e.player?.name||e.team?.name||''}</small></div></div>)}</div>:<Empty icon={Clock3} title="No timeline events yet" text="Events will appear here as the live provider publishes them."/>}</section></div>
+  const events=data?.events||[];
+  const keyEvents=events.filter(e=>['Goal','Card','subst'].some(x=>String(e.type||e.detail||'').toLowerCase().includes(x.toLowerCase()))).slice(-6).reverse();
+  const status=String(match.status||'').toUpperCase();
+  const upcoming=!liveStatuses.has(status)&&!finishedStatuses.has(status);
+  const ht=match.home_halftime!=null&&match.away_halftime!=null;
+  const info=[
+    {icon:Hourglass,label:'Half-time',value:ht?`${match.home_halftime} : ${match.away_halftime}`:'– : –',dim:!ht},
+    {icon:Flag,label:'Round',value:match.round||'Not announced',dim:!match.round},
+    {icon:Shield,label:'Referee',value:match.referee||'To be confirmed',dim:!match.referee},
+    {icon:Globe,label:'Timezone',value:(match.timezone||'Africa/Addis_Ababa').replace('_',' '),dim:false}
+  ];
+  return <div className="module-stack">
+    {upcoming&&<Countdown date={match.match_date}/>}
+    <section className="detail-card mc-card">
+      <div className="detail-card-head"><b>Match overview</b>{(match.status_long||match.status)&&<span className={`mc-pill ${liveStatuses.has(status)?'live':''}`}>{match.status_long||match.status}</span>}</div>
+      <div className="mc-info-grid">{info.map(({icon:Icon,label,value,dim})=><div className="mc-info" key={label}><span className="mc-chip"><Icon size={16}/></span><div><small>{label}</small><b className={dim?'dim':''}>{value}</b></div></div>)}</div>
+    </section>
+    <section className="detail-card mc-card">
+      <div className="detail-card-head"><b>Key moments</b><span className="mc-pill">{events.length} {events.length===1?'event':'events'}</span></div>
+      {keyEvents.length?<div className="moment-list">{keyEvents.map(e=><div key={e.id} className="moment-row"><span className="minute-chip">{e.minute}′</span><span className="event-icon">{String(e.type).toLowerCase().includes('goal')?<Goal size={16}/>:<Shield size={16}/>}</span><div><b>{e.detail||e.type}</b><small>{e.player?.name||e.team?.name||''}</small></div></div>)}</div>
+      :<div className="mc-empty"><span className="mc-empty-ring"><Clock3 size={26}/></span><b>{upcoming?'Waiting for kickoff':'No events yet'}</b><p>Goals, cards and substitutions will appear here live as soon as the provider publishes them.</p></div>}
+    </section>
+  </div>
 }
 function Timeline({events}){return <section className="detail-card"><div className="detail-card-head"><b>Match timeline</b><small>{events.length} events</small></div>{events.length?<div className="timeline-list">{events.map(e=><div className="timeline-event" key={e.id}><span className="timeline-minute">{e.minute}{e.extra?`+${e.extra}`:''}′</span><div className="timeline-node"/><div><b>{e.detail||e.type}</b><span>{e.player?.name||e.team?.name||''}{e.assist?.name?` · Assist: ${e.assist.name}`:''}</span></div></div>)}</div>:<Empty icon={Clock3} title="Timeline not available" text="This competition may not expose live event data yet."/>}</section>}
 function Lineups({lineups}){return <section className="detail-card"><div className="detail-card-head"><b>Lineups</b><small>{lineups.length?'Confirmed':'Waiting'}</small></div>{lineups.length?<div className="lineup-grid">{lineups.map(x=><div className="lineup-team" key={x.team?.id||x.team?.name}><div className="lineup-title"><span>{x.team?.logo?<img src={x.team.logo} alt=""/>:<Shirt size={17}/>}</span><div><b>{x.team?.name}</b><small>{x.formation||'Formation TBC'} · {x.coach?.name||'Coach TBC'}</small></div></div><h4>Starting XI</h4>{x.startXI.map((p,i)=><div className="player-row" key={`${p.id||p.name}-${i}`}><span>{p.number||'—'}</span><b>{p.name}</b><small>{p.pos||''}</small></div>)}<h4>Bench</h4>{x.substitutes.slice(0,8).map((p,i)=><div className="player-row bench" key={`${p.id||p.name}-${i}`}><span>{p.number||'—'}</span><b>{p.name}</b><small>{p.pos||''}</small></div>)}</div>)}</div>:<Empty icon={Shirt} title="Lineups not published" text="Confirmed starting elevens will appear when the provider has them."/>}</section>}
